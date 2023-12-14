@@ -1,0 +1,47 @@
+#!/bin/bash
+
+### VARS ###
+__STEALTH=false
+__STOP=false
+__CRACK=false
+__DETINSTRUCT=false
+__SHOWALL=false
+__NC=false
+
+usage="USAGE: gensploit [OPTIONS] [IP]"
+help=$(cat <<-HELP
+USAGE: gensploit [OPTIONS] [IP]
+
+OPTIONS:
+
+  Passing nothing will run the default pen test suite
+
+  -S | --stealth
+      Defines nmap to run SYN-Stealth scan right away instead of only running on failure
+
+  -a | --available
+      Tells gensploit to stop once all available enums are found
+
+  -c | --crack
+      Tells gensploit to try and crack a password on any of the available enums
+
+  -h | --how
+      Will give explicit access instructions for the given enums
+
+  -v | --verbose
+      Gensploit will give explicit output as to what it is doing
+
+  -s | --severity=[all,{1-4}]
+      Will display severity based on SOC Levels
+      Tags URLs, IPs, and Ports with level of severity when set
+      Can catch some or all types of severity for displaying, numbers outside the severity levels are ignored
+      Severity levels not requested aren't shown. Will attempt to generate remediation steps
+
+  -h | --help
+      Show help menu
+
+NOTES: Pen-testing basic tutorials can be found online, gensploit refers to these when giving instructions on accessing the vulnerability.
+      Utilizes searchsploit to find the exploit script once vulnerabilities are found.
+      Dependencies for gensploit are added during installation.
+HELP
+)

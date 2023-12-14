@@ -1,0 +1,36 @@
+#!/bin/bash
+
+### FUNCS ###
+
+SEARCHARGS() {
+  [[ $1 == "" ]] && echo "$usage" && exit
+  for arg in $@; do
+    # Skip the argument if it doesn't match schema otherwise run check
+    [[ ! $arg =~ "-" ]] && continue || case $arg in
+      -s | --stealth )
+        __STEALTH=true
+        ;;
+      -a | --available )
+        __STOP=true
+        ;;
+      -c | --crack )
+        __CRACK=true
+        ;;
+      -l | --listener )
+        __NC=true
+        ;;
+      -h | --how )
+        __DETINSTRUCT=true
+        ;;
+      -v | --verbose )
+        __SHOWALL=true
+        ;;
+      -h | --help )
+        echo "$help"
+        exit;;
+      * )
+        echo "$usage"
+        exit;;
+    esac
+  done
+}

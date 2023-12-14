@@ -1,0 +1,44 @@
+#!/bin/bash
+[[ $USER != "root" ]] && echo "You must be root to use this command!" && exit
+[ ! -d ~/gensploit ] && mkdir ~/gensploit
+
+### MAIN ###
+
+# Required programs check
+[[ `command -v nmap` == "" ]] && sudo apt-get install -y nmap
+[[ `command -v netstat` == "" ]] && sudo apt-get install -y net-tools
+[[ `command -v traceroute` == "" ]] && sudo apt-get install -y inetutils
+
+# Check arguments for modifiers
+SEARCHARGS $@
+while [[ $1 =~ "-" ]]; do shift; done # Finalizes move past read args
+[[ $1 == "" ]] && echo "Target IP or similar required!" && exit
+
+# Run site enumeration
+nmap -sS -sV -Pn -o ~/gensploit/nmap.log $ip
+# Find open ports
+netstat -nvlp > ~/gensploit/ports.log
+
+[ $__STOP ] && exit
+
+## Linux ##
+
+# Perform attempted SSH access
+# Find users
+# Find user password or crack
+# Show login instructions
+
+# Perform attempted HTTP/HTTPS access
+
+# Perform attempted Reverse Shell injection
+
+## Windows ##
+
+# Perform attempted SSH access
+# Find users
+# Find user password or crack
+# Show login instructions and prompt to use evil-winrm for reverse shell
+
+# Perform attempted Reverse Shell injection
+
+# Perform attempted HTTP/HTTPS access
